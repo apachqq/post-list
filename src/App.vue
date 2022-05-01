@@ -17,7 +17,7 @@
                         type="text"
                         placeholder="Описание"
                 >
-                <button class="btn" @click="createPost">Создать</button>
+                <button class="btn" @click.prevent="createPost">Создать</button>
             </form>
         </div>
         <div class="post" v-for="post in posts">
@@ -42,7 +42,14 @@
         },
         methods: {
             createPost() {
-
+                const newPost = {
+                    id: Date.now(),
+                    title: this.title,
+                    body: this.body
+                }
+                this.posts.push(newPost)
+                this.title = ''
+                this.body = ''
             }
         }
     }
