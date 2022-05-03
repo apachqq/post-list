@@ -16,9 +16,7 @@
                     {id: 1, title: 'JavaScript', body: 'Описание поста'},
                     {id: 2, title: 'JavaScript 2', body: 'Описание поста 2'},
                     {id: 3, title: 'JavaScript 3', body: 'Описание поста 3'}
-                ],
-                title: '',
-                body: ''
+                ]
             }
         },
         methods: {
