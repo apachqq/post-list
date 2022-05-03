@@ -11,16 +11,13 @@
 </template>
 
 <script>
-    import MyButton from '@/components/UI/MyButton'
-
     export default {
         props: {
             post: {
                 type: Object,
                 required: true
             }
-        },
-        components: {MyButton}
+        }
     }
 </script>
 
