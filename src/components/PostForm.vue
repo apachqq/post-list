@@ -2,15 +2,15 @@
         <form>
             <h4>Создание поста</h4>
             <input
-                    :value="title"
-                    @input="title = $event.target.value"
+                    :value="post.title"
+                    @input="post.title = $event.target.value"
                     class="input"
                     type="text"
                     placeholder="Название"
             >
             <input
-                    :value="body"
-                    @input="body = $event.target.value"
+                    :value="post.body"
+                    @input="post.body = $event.target.value"
                     class="input"
                     type="text"
                     placeholder="Описание"
@@ -20,7 +20,16 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+        data() {
+            return {
+                post: {
+                    title: '',
+                    body: ''
+                }
+            }
+        }
+    }
 </script>
 
 <style scoped>
