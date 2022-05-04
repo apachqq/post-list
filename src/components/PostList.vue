@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="posts.length">
         <h3>Список постов</h3>
         <transition-group name="post-list">
             <post-item
@@ -10,6 +10,9 @@
             ></post-item>
         </transition-group>
     </div>
+    <h2 v-else>
+        Список постов пуст
+    </h2>
 </template>
 
 <script>
@@ -33,7 +36,7 @@
     }
     .post-list-enter-active,
     .post-list-leave-active {
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
     }
     .post-list-enter-from,
     .post-list-leave-to {
