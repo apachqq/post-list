@@ -1,7 +1,6 @@
 <template>
     <div class="app">
         <h1>Страница с постами</h1>
-        <my-button @click="fetchPosts">Получить посты</my-button>
         <my-button
                 @click="showDialog"
                 style="margin: 15px 0;"
@@ -44,12 +43,17 @@
             },
             async fetchPosts() {
                 try {
-                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-                    this.posts = response.data
+                    setTimeout(async () => {
+                        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+                        this.posts = response.data
+                    }, 1000)
                 } catch (e) {
                     alert('Ошибка')
                 }
             }
+        },
+        mounted() {
+            this.fetchPosts()
         },
         components: {PostForm, PostList}
     }
