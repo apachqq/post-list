@@ -5,7 +5,8 @@
                 @click="showDialog"
                 style="margin: 15px 0;"
         >
-            Создать пост</my-button>
+            Создать пост
+        </my-button>
         <my-dialog v-model:show="dialogVisible">
             <post-form
                     @create="createPost"
@@ -14,7 +15,11 @@
         <post-list
                 :posts="posts"
                 @remove="removePost"
+                v-if="!isPostsLoading"
         ></post-list>
+        <div v-else>
+            <the-loader></the-loader>
+        </div>
     </div>
 </template>
 
@@ -27,7 +32,8 @@
         data() {
             return {
                 posts: [],
-                dialogVisible: false
+                dialogVisible: false,
+                isPostsLoading: false
             }
         },
         methods: {
@@ -43,12 +49,15 @@
             },
             async fetchPosts() {
                 try {
+                    this.isPostsLoading = true
                     setTimeout(async () => {
                         const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
                         this.posts = response.data
-                    }, 1000)
+                        this.isPostsLoading = false
+                    }, 500)
                 } catch (e) {
                     alert('Ошибка')
+                } finally {
                 }
             }
         },
