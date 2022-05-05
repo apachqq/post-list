@@ -1,12 +1,17 @@
 <template>
     <div class="app">
         <h1>Страница с постами</h1>
-        <my-button
-                @click="showDialog"
-                style="margin: 15px 0;"
-        >
-            Создать пост
-        </my-button>
+        <div class="app_btns">
+            <my-button
+                    @click="showDialog"
+            >
+                Создать пост
+            </my-button>
+            <my-select
+                    v-model="selectedSort"
+                    :options="sortOptions"
+            ></my-select>
+        </div>
         <my-dialog v-model:show="dialogVisible">
             <post-form
                     @create="createPost"
@@ -33,7 +38,12 @@
             return {
                 posts: [],
                 dialogVisible: false,
-                isPostsLoading: false
+                isPostsLoading: false,
+                selectedSort: '',
+                sortOptions: [
+                    {value: 'title', name: 'По названию'},
+                    {value: 'body', name: 'По описанию'}
+                ]
             }
         },
         methods: {
@@ -50,8 +60,8 @@
             async fetchPosts() {
                 try {
                     this.isPostsLoading = true
-                        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-                        this.posts = response.data
+                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+                    this.posts = response.data
                 } catch (e) {
                     alert('Ошибка')
                 } finally {
@@ -75,5 +85,11 @@
 
     .app {
         padding: 20px;
+    }
+
+    .app_btns {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
     }
 </style>
