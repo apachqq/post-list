@@ -31,11 +31,13 @@
         </div>
         <div class="page_wrapper">
             <div
-                    v-for="page in totalPages"
-                    :key="page"
+                    v-for="pageNumber in totalPages"
+                    :key="pageNumber"
                     class="page"
+                    :class="{'current-page': page === pageNumber}"
+                    @click="changePage(pageNumber)"
             >
-                {{ page }}
+                {{ pageNumber }}
             </div>
         </div>
     </div>
@@ -74,6 +76,9 @@
             showDialog() {
                 this.dialogVisible = true
             },
+            changePage(pageNumber) {
+                this.page = pageNumber
+            },
             async fetchPosts() {
                 try {
                     this.isPostsLoading = true
@@ -108,6 +113,9 @@
             }
         },
         watch: {
+            page() {
+                this.fetchPosts()
+            }
             // selectedSort(newValue) {
             //     this.posts.sort((post1, post2) => {
             //         return post1[newValue]?.localeCompare(post2[newValue])
