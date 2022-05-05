@@ -86,7 +86,7 @@
             },
             // Сортировка постов через input
             sortedAndSearchedPosts() {
-                return this.sortedPosts.filter(post => post.title.includes(this.searchQuery))
+                return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
             }
         },
         watch: {
