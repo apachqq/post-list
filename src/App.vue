@@ -1,10 +1,16 @@
 <template>
+    <the-navbar></the-navbar>
     <div class="app">
         <router-view></router-view>
     </div>
 </template>
 
 <script>
+    import TheNavbar from '@/components/TheNavbar'
+
+    export default {
+        components: {TheNavbar}
+    }
 </script>
 
 <style>
