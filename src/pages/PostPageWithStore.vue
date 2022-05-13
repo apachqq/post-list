@@ -1,5 +1,6 @@
 <template>
     <div>
+
 <!--        <h1>{{ $store.state.isAuth ? 'Пользователь авторизован' : 'Авторизуйтесь, чтобы использовать сервис'}}</h1>-->
 <!--        <h1>{{ $store.getters.doubleLikes }}</h1>-->
 <!--        <div>-->
@@ -7,21 +8,21 @@
 <!--            <my-button @click="this.$store.commit('decrementLikes')">Дизлайк</my-button>-->
 <!--        </div>-->
         <h1>Страница с постами</h1>
-        <my-input
-                v-model="searchQuery"
-                placeholder="Поиск.."
-                v-focus
-        ></my-input>
+<!--        <my-input-->
+<!--                v-model="searchQuery"-->
+<!--                placeholder="Поиск.."-->
+<!--                v-focus-->
+<!--        ></my-input>-->
         <div class="app_btns">
             <my-button
                     @click="showDialog"
             >
                 Создать пост
             </my-button>
-            <my-select
-                    v-model="selectedSort"
-                    :options="sortOptions"
-            ></my-select>
+<!--            <my-select-->
+<!--                    v-model="selectedSort"-->
+<!--                    :options="sortOptions"-->
+<!--            ></my-select>-->
         </div>
         <my-dialog v-model:show="dialogVisible">
             <post-form
@@ -37,17 +38,17 @@
             <the-loader></the-loader>
         </div>
         <div v-intersection="loadMorePosts"></div>
-        <!--        <div class="page_wrapper">-->
-        <!--            <div-->
-        <!--                    v-for="pageNumber in totalPages"-->
-        <!--                    :key="pageNumber"-->
-        <!--                    class="page"-->
-        <!--                    :class="{'current-page': page === pageNumber}"-->
-        <!--                    @click="changePage(pageNumber)"-->
-        <!--            >-->
-        <!--                {{ pageNumber }}-->
-        <!--            </div>-->
-        <!--        </div>-->
+                <div class="page_wrapper">
+                    <div
+                            v-for="pageNumber in totalPages"
+                            :key="pageNumber"
+                            class="page"
+                            :class="{'current-page': page === pageNumber}"
+                            @click="changePage(pageNumber)"
+                    >
+                        {{ pageNumber }}
+                    </div>
+                </div>
     </div>
 </template>
 
@@ -55,25 +56,22 @@
     import PostForm from '@/components/PostForm'
     import PostList from '@/components/PostList'
     import axios from 'axios'
+    import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
 
     export default {
         data() {
             return {
-                posts: [],
-                dialogVisible: false,
-                isPostsLoading: false,
-                selectedSort: '',
-                searchQuery: '',
-                page: 1,
-                limit: 10,
-                totalPages: 0,
-                sortOptions: [
-                    {value: 'title', name: 'По названию'},
-                    {value: 'body', name: 'По описанию'}
-                ]
+                dialogVisible: false
             }
         },
         methods: {
+            ...mapMutations({
+                setPage: 'post/setPage'
+            }),
+            ...mapActions({
+                loadMorePosts: 'post/loadMorePosts',
+                fetchPosts: 'post/fetchPosts'
+            }),
             createPost(post) {
                 this.posts.push(post)
                 this.dialogVisible = false
@@ -89,7 +87,7 @@
             // },
         },
         mounted() {
-            this.fetchPosts()
+            // this.fetchPosts()
             // console.log(this.$refs.observer)
             // const options = {
             //     rootMargin: '0px',
@@ -103,7 +101,15 @@
             // const observer = new IntersectionObserver(callback, options)
             // observer.observe(this.$refs.observer)
         },
-        computed: {},
+        computed: {
+            ...mapState({
+
+            }),
+            ...mapGetters({
+                sortedPosts: 'post/sortedPosts',
+                sortedAndSearchedPosts: 'post/sortedAndSearchedPosts'
+            })
+        },
         watch: {
             // page() {
             //     this.fetchPosts()
