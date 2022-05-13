@@ -2,8 +2,8 @@
     <div>
         <h1>{{ $store.getters.doubleLikes }}</h1>
         <div>
-            <my-button>Лайк</my-button>
-            <my-button>Дизлайк</my-button>
+            <my-button @click="this.$store.commit('incrementLikes')">Лайк</my-button>
+            <my-button @click="this.$store.commit('decrementLikes')">Дизлайк</my-button>
         </div>
         <h1>Страница с постами</h1>
         <my-input
