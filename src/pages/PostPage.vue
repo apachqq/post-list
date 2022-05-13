@@ -116,7 +116,7 @@
         },
         mounted() {
             this.fetchPosts()
-            console.log(this.$refs.observer)
+            // console.log(this.$refs.observer)
             // const options = {
             //     rootMargin: '0px',
             //     threshold: 1.0
