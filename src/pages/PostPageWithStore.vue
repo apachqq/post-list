@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>{{ $store.state.isAuth ? 'Пользователь авторизован' : 'Авторизуйтесь, чтобы использовать сервис'}}</h1>
-        <h1>{{ $store.getters.doubleLikes }}</h1>
-        <div>
-            <my-button @click="this.$store.commit('incrementLikes')">Лайк</my-button>
-            <my-button @click="this.$store.commit('decrementLikes')">Дизлайк</my-button>
-        </div>
+<!--        <h1>{{ $store.state.isAuth ? 'Пользователь авторизован' : 'Авторизуйтесь, чтобы использовать сервис'}}</h1>-->
+<!--        <h1>{{ $store.getters.doubleLikes }}</h1>-->
+<!--        <div>-->
+<!--            <my-button @click="this.$store.commit('incrementLikes')">Лайк</my-button>-->
+<!--            <my-button @click="this.$store.commit('decrementLikes')">Дизлайк</my-button>-->
+<!--        </div>-->
         <h1>Страница с постами</h1>
         <my-input
                 v-model="searchQuery"
@@ -87,38 +87,6 @@
             // changePage(pageNumber) {
             //     this.page = pageNumber
             // },
-            async fetchPosts() {
-                try {
-                    this.isPostsLoading = true
-                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-                        params: {
-                            _page: this.page,
-                            _limit: this.limit
-                        }
-                    })
-                    this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-                    this.posts = response.data
-                } catch (e) {
-                    alert('Ошибка')
-                } finally {
-                    this.isPostsLoading = false
-                }
-            },
-            async loadMorePosts() {
-                try {
-                    this.page += 1
-                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-                        params: {
-                            _page: this.page,
-                            _limit: this.limit
-                        }
-                    })
-                    this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-                    this.posts = [...this.posts, ...response.data]
-                } catch (e) {
-                    alert('Ошибка')
-                }
-            }
         },
         mounted() {
             this.fetchPosts()
@@ -135,18 +103,7 @@
             // const observer = new IntersectionObserver(callback, options)
             // observer.observe(this.$refs.observer)
         },
-        computed: {
-            // Сортировка постов через select
-            sortedPosts() {
-                return [...this.posts].sort((post1, post2) => {
-                    return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
-                })
-            },
-            // Сортировка постов через input
-            sortedAndSearchedPosts() {
-                return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
-            }
-        },
+        computed: {},
         watch: {
             // page() {
             //     this.fetchPosts()
