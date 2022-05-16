@@ -22,7 +22,7 @@
             </my-button>
             <my-select
                     :model-value="selectedSort"
-                    @update:model="setSelectedSort"
+                    @update:model-value="setSelectedSort"
                     :options="sortOptions"
             ></my-select>
         </div>

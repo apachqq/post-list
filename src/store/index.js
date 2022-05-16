@@ -3,7 +3,7 @@ import { postModule } from '@/store/postModule'
 
 export default createStore({
     state: {
-        isAuth: false
+        isAuth: true
     },
     getters: {},
     mutations: {
