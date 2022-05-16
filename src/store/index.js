@@ -9,6 +9,9 @@ export default createStore({
     mutations: {
         login(state) {
             state.isAuth = true
+        },
+        logout(state) {
+            state.isAuth = false
         }
     },
     actions: {},

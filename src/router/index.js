@@ -6,18 +6,28 @@ import PostIdPage from '@/pages/PostIdPage'
 import PageNotFound from '@/pages/PageNotFound'
 import PostPageWithStore from '@/pages/PostPageWithStore'
 import LoginPage from '@/pages/LoginPage'
+import index from '@/store'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/', component: MainPage},
-        {path: '/posts', component: PostPage},
-        {path: '/about', component: AboutUs},
-        {path: '/posts/:id', component: PostIdPage},
+        {path: '/', name: 'MainPage', component: MainPage},
+        {path: '/posts', name: 'PostPage', component: PostPage},
+        {path: '/about', name: 'AboutUs', component: AboutUs},
+        {path: '/posts/:id', name: 'PostIdPage', component: PostIdPage},
         {path: '/:notFound(.*)', name: 'PageNotFound', component: PageNotFound},
-        {path: '/store', component: PostPageWithStore},
-        {path: '/login', component: LoginPage}
+        {path: '/store', name: 'PostPageWithStore', component: PostPageWithStore},
+        {path: '/login', name: 'LoginPage', component: LoginPage}
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    if (!index.state.isAuth && to.name === 'PostPage') {
+        alert('Не авторизован!')
+        next('/login')
+    } else {
+        next()
+    }
 })
 
 export default router

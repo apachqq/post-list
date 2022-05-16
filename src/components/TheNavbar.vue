@@ -5,12 +5,33 @@
             <my-button @click="this.$router.push('/posts')">К постам</my-button>
             <my-button style="margin-left: 20px" @click="this.$router.push('/about')">О приложении</my-button>
             <my-button style="margin-left: 20px" @click="this.$router.push('/store')">store</my-button>
-            <my-button style="margin-left: 20px" @click="this.$router.push('/login')">Авторизоваться</my-button>
+            <my-button
+                    style="margin-left: 20px"
+                    @click="this.$router.push('/login')"
+                    v-if="!$store.state.isAuth"
+            >
+                Авторизоваться
+            </my-button>
+            <my-button
+                    style="margin-left: 20px"
+                    @click="logout"
+                    v-else
+            >
+                Выйти
+            </my-button>
         </div>
     </div>
 </template>
 
 <script>
+    export default {
+        methods: {
+            logout() {
+                this.$store.commit('logout')
+                this.$router.push('/login')
+            }
+        }
+    }
 </script>
 
 <style scoped>

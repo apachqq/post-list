@@ -30,6 +30,7 @@
             submit() {
                 if (this.isValid) {
                     this.$store.commit('login')
+                    this.$router.push('/')
                 }
             }
         }
