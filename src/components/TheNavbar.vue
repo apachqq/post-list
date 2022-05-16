@@ -5,12 +5,12 @@
             <my-button @click="this.$router.push('/posts')">К постам</my-button>
             <my-button style="margin-left: 20px" @click="this.$router.push('/about')">О приложении</my-button>
             <my-button style="margin-left: 20px" @click="this.$router.push('/store')">store</my-button>
+            <my-button style="margin-left: 20px" @click="this.$router.push('/login')">Авторизоваться</my-button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {}
 </script>
 
 <style scoped>

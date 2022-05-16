@@ -5,6 +5,7 @@ import AboutUs from '@/pages/AboutUs'
 import PostIdPage from '@/pages/PostIdPage'
 import PageNotFound from '@/pages/PageNotFound'
 import PostPageWithStore from '@/pages/PostPageWithStore'
+import LoginPage from '@/pages/LoginPage'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,7 +15,8 @@ const router = createRouter({
         {path: '/about', component: AboutUs},
         {path: '/posts/:id', component: PostIdPage},
         {path: '/:notFound(.*)', name: 'PageNotFound', component: PageNotFound},
-        {path: '/store', component: PostPageWithStore}
+        {path: '/store', component: PostPageWithStore},
+        {path: '/login', component: LoginPage}
     ]
 })
 
