@@ -3,10 +3,10 @@
         <h2>Авторизуйтесь</h2>
         <form @submit.prevent="submit">
             <div class="input">
-                <my-input type="email" placeholder="Введите email" v-model="email"></my-input>
+                <my-input type="email" placeholder="Введите email" v-model.trim="email"></my-input>
             </div>
             <div class="input">
-                <my-input type="password" placeholder="Введите пароль" v-model="password"></my-input>
+                <my-input type="password" placeholder="Введите пароль" v-model.trim="password"></my-input>
             </div>
             <my-button style="margin-top: 20px;">Авторизуйтесь</my-button>
         </form>
