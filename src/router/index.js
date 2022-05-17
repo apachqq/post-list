@@ -23,7 +23,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (!index.state.isAuth && to.name === 'PostPage') {
-        alert('Не авторизован!')
+        alert('Чтобы получить доступ к списку постов, пожалуйста, авторизуйтесь')
         next('/login')
     } else {
         next()
