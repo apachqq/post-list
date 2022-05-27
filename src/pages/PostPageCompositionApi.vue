@@ -39,6 +39,7 @@
     import PostList from '@/components/PostList'
     import axios from 'axios'
     import {ref} from 'vue'
+    import { usePosts } from "@/hooks/usePosts";
 
     export default {
         data() {
@@ -51,11 +52,7 @@
             }
         },
         setup(props) {
-            const likes = ref(0)
-
-            const addLike = () => {
-                likes.value++
-            }
+            const {posts, totalPages, isPostsLoading} = usePosts(10)
 
             return {
                 likes,
