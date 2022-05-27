@@ -9,8 +9,8 @@ export function usePosts(limit) {
         try {
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                 params: {
-                    _page: this.page,
-                    _limit: this.limit
+                    _page: 1,
+                    _limit: limit
                 }
             })
             totalPages.value = Math.ceil(response.headers['x-total-count'] / limit)

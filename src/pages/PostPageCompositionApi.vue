@@ -1,36 +1,28 @@
 <template>
     <div>
         <h1>Страница с постами</h1>
-<!--        <my-input-->
-<!--                v-model="searchQuery"-->
-<!--                placeholder="Поиск.."-->
-<!--                v-focus-->
-<!--        ></my-input>-->
-<!--        <div class="app_btns">-->
-<!--            <my-button-->
-<!--                    @click="showDialog"-->
-<!--            >-->
-<!--                Создать пост-->
-<!--            </my-button>-->
-<!--            <my-select-->
-<!--                    v-model="selectedSort"-->
-<!--                    :options="sortOptions"-->
-<!--            ></my-select>-->
-<!--        </div>-->
-<!--        <my-dialog v-model:show="dialogVisible">-->
-<!--            <post-form-->
-<!--                    @create="createPost"-->
-<!--            ></post-form>-->
-<!--        </my-dialog>-->
-<!--        <post-list-->
-<!--                :posts="sortedAndSearchedPosts"-->
-<!--                @remove="removePost"-->
-<!--                v-if="!isPostsLoading"-->
-<!--        ></post-list>-->
-<!--        <div v-else>-->
-<!--            <the-loader></the-loader>-->
-<!--        </div>-->
-<!--        <div v-intersection="loadMorePosts"></div>-->
+        <my-input
+                v-model="searchQuery"
+                placeholder="Поиск.."
+                v-focus
+        ></my-input>
+        <div class="app_btns">
+            <my-button>Создать пост</my-button>
+            <my-select
+                    v-model="selectedSort"
+                    :options="sortOptions"
+            ></my-select>
+        </div>
+        <my-dialog v-model:show="dialogVisible">
+            <post-form></post-form>
+        </my-dialog>
+        <post-list
+                :posts="sortedAndSearchedPosts"
+                v-if="!isPostsLoading"
+        ></post-list>
+        <div v-else>
+            <the-loader></the-loader>
+        </div>
     </div>
 </template>
 
@@ -39,7 +31,9 @@
     import PostList from '@/components/PostList'
     import axios from 'axios'
     import {ref} from 'vue'
-    import { usePosts } from "@/hooks/usePosts";
+    import { usePosts } from '@/hooks/usePosts'
+    import useSortedPosts from '@/hooks/useSortedPosts'
+    import useSortedAndSearchedPosts from '@/hooks/useSortedAndSearchedPosts'
 
     export default {
         data() {
@@ -53,10 +47,17 @@
         },
         setup(props) {
             const {posts, totalPages, isPostsLoading} = usePosts(10)
+            const {sortedPosts, selectedSort} = useSortedPosts(posts)
+            const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts)
 
             return {
-                likes,
-                addLike
+                posts,
+                totalPages,
+                isPostsLoading,
+                sortedPosts,
+                selectedSort,
+                searchQuery,
+                sortedAndSearchedPosts
             }
         },
         components: {PostForm, PostList}

@@ -1,13 +1,14 @@
 import { computed, ref } from 'vue'
 
 export default function useSortedPosts(sortedPosts) {
-    const selectedSort = ref('')
-    const sortedPosts = computed(() => {
-        return [...posts.value].sort((post1, post2) => post1[selectedSort.value]?.localeCompare(post2[selectedSort.value]))
+    const searchQuery = ref('')
+
+    const sortedAndSearchedPosts = computed(() => {
+        return sortedPosts.value.filter(post => post.title.toLowerCase().includes(searchQuery.value.toLowerCase()))
     })
 
     return {
-        selectedSort,
-        sortedPosts
+        searchQuery,
+        sortedAndSearchedPosts
     }
 }
