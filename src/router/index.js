@@ -5,6 +5,7 @@ import AboutUs from '@/pages/AboutUs'
 import PostIdPage from '@/pages/PostIdPage'
 import PageNotFound from '@/pages/PageNotFound'
 import PostPageWithStore from '@/pages/PostPageWithStore'
+import PostPageCompositionApi from '@/pages/PostPageCompositionApi'
 import LoginPage from '@/pages/LoginPage'
 import index from '@/store'
 
@@ -17,7 +18,8 @@ const router = createRouter({
         {path: '/posts/:id', name: 'PostIdPage', component: PostIdPage},
         {path: '/:notFound(.*)', name: 'PageNotFound', component: PageNotFound},
         {path: '/store', name: 'PostPageWithStore', component: PostPageWithStore},
-        {path: '/login', name: 'LoginPage', component: LoginPage}
+        {path: '/login', name: 'LoginPage', component: LoginPage},
+        {path: '/composition', name: 'PostPageCompositionApi', component: PostPageCompositionApi}
     ]
 })
 
